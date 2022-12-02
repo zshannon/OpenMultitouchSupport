@@ -139,7 +139,9 @@
 
 - (void)didWakeUp:(NSNotification *)note {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self startHandlingMultitouchEvents];
+        if (self.listeners.count > 0) {
+            [self startHandlingMultitouchEvents];
+        }
     });
 }
 
