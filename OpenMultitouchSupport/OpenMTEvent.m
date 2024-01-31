@@ -12,7 +12,7 @@
 @implementation OpenMTEvent
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Touches: %@, Device ID: %i, Frame ID: %i, Timestamp: %f", _touches.description, _deviceID, _frameID, _timestamp];
+    return [NSString stringWithFormat:@"Touches: %@, Device ID: %i, Frame ID: %i, Timestamp: %f, Device Type: %i", _touches.description, _deviceID, _frameID, _timestamp, _device.type];
 }
 
 @end

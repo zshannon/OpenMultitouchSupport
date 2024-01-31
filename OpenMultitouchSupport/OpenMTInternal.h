@@ -55,14 +55,14 @@ typedef struct {
     int field15;
     float density; //area density of capacitance
 } MTTouch;
-
 typedef void *MTDeviceRef;
 typedef void (*MTFrameCallbackFunction)(MTDeviceRef device, MTTouch touches[], int numTouches, double timestamp, int frame);
 typedef void (*MTPathCallbackFunction)(MTDeviceRef device, long pathID, long state, MTTouch* touch);
 typedef void (*MTImageCallbackFunction)(MTDeviceRef, void*, void*, void*);
 
 bool MTDeviceIsAvailable(void); // true if can create default device
-MTDeviceRef MTDeviceCreateDefault(void);
+
+CFMutableArrayRef MTDeviceCreateList(void);
 OSStatus MTDeviceStart(MTDeviceRef, int);
 OSStatus MTDeviceStop(MTDeviceRef);
 void MTDeviceRelease(MTDeviceRef);

@@ -14,6 +14,7 @@
 
 @interface OpenMTListener()
 
+- (instancetype)initWithCallback:(OpenMTEventCallback)callback;
 - (instancetype)initWithTarget:(id)target selector:(SEL)selector;
 - (void)listenToEvent:(OpenMTEvent *)event;
 - (BOOL)dead;

@@ -10,10 +10,12 @@
 #define OpenMTEvent_h
 
 #import <Foundation/Foundation.h>
+#import "OpenMTDevice.h"
 
 @interface OpenMTEvent: NSObject
 
-@property (strong, readonly) NSArray *touches;
+@property (strong, readonly, nonnull) NSArray *touches;
+@property (assign, readonly, nullable) OpenMTDevice *device;
 @property (assign, readonly) int deviceID;
 @property (assign, readonly) int frameID;
 @property (assign, readonly) double timestamp;

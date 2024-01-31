@@ -10,9 +10,8 @@ import Cocoa
 import OpenMultitouchSupport
 
 class ViewController: NSViewController {
-    
     @IBOutlet var textView: NSTextView!
-    
+
     let manager = OpenMTManager.shared()
     var listener: OpenMTListener! = nil
     let fmt = DateFormatter()
@@ -23,23 +22,27 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         fmt.dateFormat = "HH:mm:ss.SSSS"
         textView.font = NSFont(name: "menlo", size: 13)
-        listener = manager?.addListener(withTarget: self, selector: #selector(process))
+//        listener = manager?.addListener(withTarget: self, selector: #selector(process))
+        listener = manager?.addListener(callback: { event in
+            guard let event = event else { return }
+            self.process(event)
+        })
     }
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
-    
+
     override func viewWillDisappear() {
         manager?.remove(listener)
     }
-    
+
     @objc func process(_ event: OpenMTEvent) {
         guard let touches = event.touches as NSArray as? [OpenMTTouch] else { return }
         if touches.count > 0 {
-            touches.forEach { (touch) in
+            touches.forEach { touch in
                 let state: String
                 switch touch.state {
                 case .notTouching: state = "not-touch"
@@ -60,14 +63,15 @@ class ViewController: NSViewController {
                                       angle: touch.angle,
                                       density: touch.density,
                                       state: state,
-                                      timestamp: fmt.string(from: Date())))
+                                      timestamp: fmt.string(from: Date()),
+                                      deviceType: event.device?.familyID))
                 updateTextView(data.last!.explanation)
             }
         } else {
             data.removeAll()
         }
     }
-    
+
     func updateTextView(_ text: String) {
         DispatchQueue.main.async {
             self.texts.append(text)
@@ -78,6 +82,4 @@ class ViewController: NSViewController {
             self.textView.scrollToEndOfDocument(nil)
         }
     }
-
 }
-

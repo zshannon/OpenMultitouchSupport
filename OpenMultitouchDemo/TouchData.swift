@@ -23,14 +23,15 @@ struct TouchData {
     let density: Float
     let state: String
     let timestamp: String
+    let deviceType: Int32?
     
     var description: String {
         return  String(format: "%2d,%05.3f,%05.3f,%05.3f,%05.3f,%05.3f,%05.3f,%05.3f,%05.3f,%@,%@\n",
                        id, pos.x, pos.y, total, pressure, axis.x, axis.y, angle, density, state, timestamp)
     }
     var explanation: String {
-        return  String(format: "id:%2d, pos:(%05.3f,%05.3f), total:%05.3f, pressure:%05.3f, axis(%05.3f,%05.3f), angle:%05.3f, density:%05.3f, %@, %@",
-                       id, pos.x, pos.y, total, pressure, axis.x, axis.y, angle, density, state, timestamp)
+        return  String(format: "id:%2d, d:%2d, pos:(%05.3f,%05.3f), total:%05.3f, pressure:%05.3f, axis(%05.3f,%05.3f), angle:%05.3f, density:%05.3f, %@, %@",
+                       id, deviceType ?? 0, pos.x, pos.y, total, pressure, axis.x, axis.y, angle, density, state, timestamp)
     }
 }
 

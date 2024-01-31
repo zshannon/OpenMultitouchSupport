@@ -19,6 +19,7 @@
 + (BOOL)systemSupportsMultitouch;
 + (OpenMTManager *)sharedManager;
 
+- (OpenMTListener *)addListenerWithCallback:(OpenMTEventCallback)callback;
 - (OpenMTListener *)addListenerWithTarget:(id)target selector:(SEL)selector;
 - (void)removeListener:(OpenMTListener *)listener;
 

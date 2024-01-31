@@ -22,6 +22,13 @@
     return self;
 }
 
+- (instancetype)initWithCallback:(OpenMTEventCallback)callback {
+    if (self = [self init]) {
+        _callback = callback;
+    }
+    return self;
+}
+
 - (instancetype)initWithTarget:(id)target selector:(SEL)selector {
     if (self = [self init]) {
         _target = target;
